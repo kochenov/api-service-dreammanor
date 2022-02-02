@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Vegetable;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\Vegetable as VegetableResource;
 use App\Http\Requests\VegetableStoreRequest;
 
@@ -28,46 +27,45 @@ class VegetableController extends Controller
      */
     public function store(VegetableStoreRequest $request)
     {
-        //
         $create_vegetable = Vegetable::create($request->validated());
-
         return new VegetableResource($create_vegetable);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Vegetable  $vegetable
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Vegetable $vegetable)
     {
-        return new VegetableResource(Vegetable::findOrFail($id));
+        return new VegetableResource($vegetable);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\VegetableStoreRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Vegetable  $vegetable
      * @return \Illuminate\Http\Response
      */
     public function update(VegetableStoreRequest $request, Vegetable $vegetable)
     {
-
         $vegetable->update($request->validated());
 
-        return $vegetable->id;
+        return new VegetableResource($vegetable);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Vegetable  $vegetable
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Vegetable $vegetable)
     {
-        //
+        $vegetable->delete();
+
+        return response()->noContent();
     }
 }
