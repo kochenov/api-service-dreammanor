@@ -16,11 +16,11 @@ class CreateVegetableCalculatesTable extends Migration
         Schema::create('vegetable_calculates', function (Blueprint $table) {
             $table->id();
             $table->string('name'); // название грядки
-            $table->foreignId('vegetable_id')->constrained();
+            $table->foreignId('vegetable_sort_id')->constrained();
             //$table->foreignId('user_id')->constrained();
             $table->integer('bushes'); // Количество кустов
             $table->integer('rows'); // Количество рядов
-            $table->tinyInteger('exp'); // Состояние блока( открыт / закрыт)
+            $table->tinyInteger('exp'); // Состояние блока( открыт /)
             $table->timestamps();
         });
     }
