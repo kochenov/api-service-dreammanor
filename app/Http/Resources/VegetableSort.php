@@ -15,12 +15,14 @@ class VegetableSort extends JsonResource
      */
     public function toArray($request)
     {
+
+
         return [
             'id' => $this->id,
             'name' => $this->name,
             'distanceBetweenRows' => $this->distanceBetweenRows,
             'distanceBetweenBushes' => $this->distanceBetweenBushes,
-            'vegetable' => new VegetableResource($this->vegetable),
+            'vegetable' =>  $this->vegetable,
         ];
     }
 }

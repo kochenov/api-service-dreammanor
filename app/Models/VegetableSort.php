@@ -19,6 +19,6 @@ class VegetableSort extends Model
 
     public function vegetable()
     {
-        return  $this->hasOne(Vegetable::class, 'id', 'vegetable_id');
+        return  $this->belongsTo(Vegetable::class);
     }
 }

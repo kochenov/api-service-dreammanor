@@ -12,4 +12,9 @@ class Vegetable extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function sorts()
+    {
+        return  $this->hasMany(VegetableSort::class);
+    }
 }

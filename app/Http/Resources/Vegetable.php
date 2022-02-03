@@ -3,6 +3,8 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\VegetableSort as VegetableSortResource;
+use App\Models\VegetableSort;
 
 class Vegetable extends JsonResource
 {
@@ -14,9 +16,11 @@ class Vegetable extends JsonResource
      */
     public function toArray($request)
     {
+
         return [
             'id' => $this->id,
-            'name' => $this->name
+            'name' => $this->name,
+            'sorts' => $this->sorts,
         ];
     }
 }
