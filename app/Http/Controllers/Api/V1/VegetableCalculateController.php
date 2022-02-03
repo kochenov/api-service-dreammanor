@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\V1;
 use App\Models\VegetableCalculate;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Resources\VegetableCalculate as VegetableCalculateResource;
+use App\Http\Requests\VegetableCalculateStoreRequest;
 
 class VegetableCalculateController extends Controller
 {
@@ -15,7 +17,7 @@ class VegetableCalculateController extends Controller
      */
     public function index()
     {
-        //
+        return VegetableCalculateResource::collection(VegetableCalculate::all());
     }
 
     /**
@@ -24,9 +26,10 @@ class VegetableCalculateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(VegetableCalculateStoreRequest $request)
     {
-        //
+        $create_vegetable_calculate = VegetableCalculate::create($request->validated());
+        return new VegetableCalculateResource($create_vegetable_calculate);
     }
 
     /**
@@ -37,7 +40,7 @@ class VegetableCalculateController extends Controller
      */
     public function show(VegetableCalculate $vegetableCalculate)
     {
-        //
+        return new VegetableCalculateResource($vegetableCalculate);
     }
 
     /**
@@ -47,9 +50,10 @@ class VegetableCalculateController extends Controller
      * @param  \App\Models\VegetableCalculate  $vegetableCalculate
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, VegetableCalculate $vegetableCalculate)
+    public function update(VegetableCalculateStoreRequest $request, VegetableCalculate $vegetableCalculate)
     {
-        //
+        $vegetableCalculate->update($request->validated());
+        return new VegetableCalculateResource($vegetableCalculate);
     }
 
     /**
@@ -60,6 +64,8 @@ class VegetableCalculateController extends Controller
      */
     public function destroy(VegetableCalculate $vegetableCalculate)
     {
-        //
+        $vegetableCalculate->delete();
+
+        return response()->noContent();
     }
 }

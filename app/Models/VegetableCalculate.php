@@ -10,6 +10,15 @@ class VegetableCalculate extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'bushes',
+        'rows',
+        'exp',
+        'vegetable_sort_id'
+    ];
+
+
     public function vegetableSorts()
     {
         return  $this->hasOne(VegetableSort::class, 'id', 'vegetable_sort_id');

@@ -50,14 +50,9 @@ class VegetableSortController extends Controller
      * @param  \App\Models\VegetableSort  $vegetableSort
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, VegetableSort $vegetableSort)
+    public function update(VegetableSortStoreRequest $request, VegetableSort $vegetableSort)
     {
-        $vegetableSort->update($request->validate([
-            'name' => 'required|max:255',
-            'distanceBetweenRows' => 'required|numeric|min:1|max:500',
-            'distanceBetweenBushes' => 'required|numeric|min:1|max:500',
-            'vegetable_id' => 'required|integer|numeric|min:1|exists:vegetables,id'
-        ]));
+        $vegetableSort->update($request->validated());
         return new VegetableSortResource($vegetableSort);
     }
 

@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class VegetableSortStoreRequest extends FormRequest
 {
@@ -25,7 +24,7 @@ class VegetableSortStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:255|unique:vegetable_sorts',
+            'name' => 'required|max:255|unique:vegetable_sorts,name,' . $this->vegetable_sort->id,
             'distanceBetweenRows' => 'required|numeric|min:1|max:500',
             'distanceBetweenBushes' => 'required|numeric|min:1|max:500',
             'vegetable_id' => 'required|integer|numeric|min:1|exists:vegetables,id'
