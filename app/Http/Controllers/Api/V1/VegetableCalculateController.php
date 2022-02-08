@@ -50,9 +50,17 @@ class VegetableCalculateController extends Controller
      * @param  \App\Models\VegetableCalculate  $vegetableCalculate
      * @return \Illuminate\Http\Response
      */
-    public function update(VegetableCalculateStoreRequest $request, VegetableCalculate $vegetableCalculate)
+    public function update(Request $request, VegetableCalculate $vegetableCalculate)
     {
-        $vegetableCalculate->update($request->validated());
+        $vegetableCalculate->update($request->validate(
+            [
+                'name' => 'required|max:255|unique:vegetable_calculates,name,' . $vegetableCalculate->id,
+                'bushes' => 'required|numeric|min:1|max:500',
+                'rows' => 'required|numeric|min:1|max:500',
+                'vegetable_sort_id' => 'required|integer|numeric|min:1|exists:vegetable_sorts,id',
+                'exp' => 'required|integer|numeric|min:0|max:1'
+            ]
+        ));
         return new VegetableCalculateResource($vegetableCalculate);
     }
 

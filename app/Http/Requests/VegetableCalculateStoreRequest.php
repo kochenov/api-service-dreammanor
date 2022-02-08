@@ -24,7 +24,8 @@ class VegetableCalculateStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:255|unique:vegetable_calculates,name,' . $this->vegetable_calculate->id,
+            'name' => 'required|max:255|unique:vegetable_calculates,name,',
+            // 'name' => 'required|max:255|unique:vegetable_calculates,name,' . $this->vegetable_calculate->id,
             'bushes' => 'required|numeric|min:1|max:500',
             'rows' => 'required|numeric|min:1|max:500',
             'vegetable_sort_id' => 'required|integer|numeric|min:1|exists:vegetable_sorts,id',
